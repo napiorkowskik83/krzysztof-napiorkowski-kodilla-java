@@ -14,10 +14,7 @@ public class StatisticsCalculatorTestSuite {
     public void testCalculateAdvStatisticsWith0Posts() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        ArrayList<String> usersList = new ArrayList<String>();
-        for (int i = 0; i < 10; i++) {
-            usersList.add("user" + (i + 1));
-        }
+        ArrayList<String> usersList = createUsersList(10);
         int postsNo = 0;
         int commentsNo = 0;
         when(statisticsMock.usersNames()).thenReturn(usersList);
@@ -33,8 +30,8 @@ public class StatisticsCalculatorTestSuite {
         double retrievedAvCommentsPerPost = statCalc.avCommentsPerPost;
 
         //Then
-        Assert.assertEquals(0 / 10, retrievedAvPostsPerUser, 0);
-        Assert.assertEquals(0 / 10, retrievedAvCommentsPerUser, 0);
+        Assert.assertEquals(postsNo / usersList.size(), retrievedAvPostsPerUser, 0);
+        Assert.assertEquals(commentsNo / usersList.size(), retrievedAvCommentsPerUser, 0);
         Assert.assertEquals(0, retrievedAvCommentsPerPost, 0);
     }
 
@@ -42,10 +39,7 @@ public class StatisticsCalculatorTestSuite {
     public void testCalculateAdvStatisticsWith1000Posts() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        ArrayList<String> usersList = new ArrayList<String>();
-        for (int i = 0; i < 10; i++) {
-            usersList.add("user" + (i + 1));
-        }
+        ArrayList<String> usersList = createUsersList(10);
         int postsNo = 1000;
         int commentsNo = 20;
         when(statisticsMock.usersNames()).thenReturn(usersList);
@@ -61,19 +55,16 @@ public class StatisticsCalculatorTestSuite {
         double retrievedAvCommentsPerPost = statCalc.avCommentsPerPost;
 
         //Then
-        Assert.assertEquals(1000 / 10, retrievedAvPostsPerUser, 0);
-        Assert.assertEquals(20 / 10, retrievedAvCommentsPerUser, 0);
-        Assert.assertEquals(20 / 1000, retrievedAvCommentsPerPost, 0);
+        Assert.assertEquals(postsNo / usersList.size(), retrievedAvPostsPerUser, 0);
+        Assert.assertEquals(commentsNo / usersList.size(), retrievedAvCommentsPerUser, 0);
+        Assert.assertEquals(commentsNo / postsNo, retrievedAvCommentsPerPost, 0);
     }
 
     @Test
     public void testCalculateAdvStatisticsWith0Comments() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        ArrayList<String> usersList = new ArrayList<String>();
-        for (int i = 0; i < 10; i++) {
-            usersList.add("user" + (i + 1));
-        }
+        ArrayList<String> usersList = createUsersList(10);
         int postsNo = 35;
         int commentsNo = 0;
         when(statisticsMock.usersNames()).thenReturn(usersList);
@@ -89,19 +80,16 @@ public class StatisticsCalculatorTestSuite {
         double retrievedAvCommentsPerPost = statCalc.avCommentsPerPost;
 
         //Then
-        Assert.assertEquals(35 / 10, retrievedAvPostsPerUser, 0);
-        Assert.assertEquals(0 / 10, retrievedAvCommentsPerUser, 0);
-        Assert.assertEquals(0 / 35, retrievedAvCommentsPerPost, 0);
+        Assert.assertEquals(postsNo / usersList.size(), retrievedAvPostsPerUser, 0);
+        Assert.assertEquals(commentsNo / usersList.size(), retrievedAvCommentsPerUser, 0);
+        Assert.assertEquals(commentsNo / postsNo, retrievedAvCommentsPerPost, 0);
     }
 
     @Test
     public void testCalculateAdvStatisticsWithLessCommentsThanPosts() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        ArrayList<String> usersList = new ArrayList<String>();
-        for (int i = 0; i < 11; i++) {
-            usersList.add("user" + (i + 1));
-        }
+        ArrayList<String> usersList = createUsersList(11);
         int postsNo = 35;
         int commentsNo = 23;
         when(statisticsMock.usersNames()).thenReturn(usersList);
@@ -117,19 +105,16 @@ public class StatisticsCalculatorTestSuite {
         double retrievedAvCommentsPerPost = statCalc.avCommentsPerPost;
 
         //Then
-        Assert.assertEquals(35 / 11, retrievedAvPostsPerUser, 0);
-        Assert.assertEquals(23 / 11, retrievedAvCommentsPerUser, 0);
-        Assert.assertEquals(23 / 35, retrievedAvCommentsPerPost, 0);
+        Assert.assertEquals(postsNo / usersList.size(), retrievedAvPostsPerUser, 0);
+        Assert.assertEquals(commentsNo / usersList.size(), retrievedAvCommentsPerUser, 0);
+        Assert.assertEquals(commentsNo / postsNo, retrievedAvCommentsPerPost, 0);
     }
 
     @Test
     public void testCalculateAdvStatisticsWithMoreCommentsThanPosts() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        ArrayList<String> usersList = new ArrayList<String>();
-        for (int i = 0; i < 10; i++) {
-            usersList.add("user" + (i + 1));
-        }
+        ArrayList<String> usersList = createUsersList(13);
         int postsNo = 35;
         int commentsNo = 47;
         when(statisticsMock.usersNames()).thenReturn(usersList);
@@ -145,16 +130,16 @@ public class StatisticsCalculatorTestSuite {
         double retrievedAvCommentsPerPost = statCalc.avCommentsPerPost;
 
         //Then
-        Assert.assertEquals(35 / 10, retrievedAvPostsPerUser, 0);
-        Assert.assertEquals(47 / 10, retrievedAvCommentsPerUser, 0);
-        Assert.assertEquals(47 / 35, retrievedAvCommentsPerPost, 0);
+        Assert.assertEquals(postsNo / usersList.size(), retrievedAvPostsPerUser, 0);
+        Assert.assertEquals(commentsNo / usersList.size(), retrievedAvCommentsPerUser, 0);
+        Assert.assertEquals(commentsNo / postsNo, retrievedAvCommentsPerPost, 0);
     }
 
     @Test
     public void testCalculateAdvStatisticsWith0Users() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        ArrayList<String> usersList = new ArrayList<String>();
+        ArrayList<String> usersList = createUsersList(0);
         int postsNo = 0;
         int commentsNo = 0;
         when(statisticsMock.usersNames()).thenReturn(usersList);
@@ -179,10 +164,7 @@ public class StatisticsCalculatorTestSuite {
     public void testCalculateAdvStatisticsWith100Users() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-        ArrayList<String> usersList = new ArrayList<String>();
-        for (int i = 0; i < 100; i++) {
-            usersList.add("user" + (i + 1));
-        }
+        ArrayList<String> usersList = createUsersList(100);
         int postsNo = 35;
         int commentsNo = 67;
         when(statisticsMock.usersNames()).thenReturn(usersList);
@@ -198,8 +180,16 @@ public class StatisticsCalculatorTestSuite {
         double retrievedAvCommentsPerPost = statCalc.avCommentsPerPost;
 
         //Then
-        Assert.assertEquals(35 / 100, retrievedAvPostsPerUser, 0);
-        Assert.assertEquals(67 / 100, retrievedAvCommentsPerUser, 0);
-        Assert.assertEquals(67 / 35, retrievedAvCommentsPerPost, 0);
+        Assert.assertEquals(postsNo / usersList.size(), retrievedAvPostsPerUser, 0);
+        Assert.assertEquals(commentsNo / usersList.size(), retrievedAvCommentsPerUser, 0);
+        Assert.assertEquals(commentsNo / postsNo, retrievedAvCommentsPerPost, 0);
+    }
+
+    private ArrayList<String> createUsersList(int usersNo) {
+        ArrayList<String> usersList = new ArrayList<String>();
+        for (int i = 0; i < usersNo; i++) {
+            usersList.add("user" + (i + 1));
+        }
+        return usersList;
     }
 }
