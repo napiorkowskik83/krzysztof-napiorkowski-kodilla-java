@@ -1,15 +1,10 @@
 package com.kodilla.stream;
 
-
-import com.kodilla.stream.beautifier.PoemBeautifier;
+import com.kodilla.stream.iterate.NumbersGenerator;
 
 public class StreamMain {
     public static void main(String[] args) {
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-
-        poemBeautifier.beautify("DEFG", poem -> "ABC" + poem);
-        poemBeautifier.beautify("decorate", poem -> poem.toUpperCase());
-        poemBeautifier.beautify("   Lambda Expression   ", poem -> poem.trim());
-        poemBeautifier.beautify("Obama", poem -> poem.replace('b', 's'));
+        System.out.println("Using Stream to generate even numbers from 1 to 20");
+        NumbersGenerator.generateEven(20);
     }
 }
