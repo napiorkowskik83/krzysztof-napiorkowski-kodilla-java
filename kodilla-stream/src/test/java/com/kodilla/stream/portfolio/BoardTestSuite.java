@@ -153,7 +153,8 @@ public class BoardTestSuite {
         List<Integer> tasksAwaitingTimes = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
-                .map(t -> LocalDate.now().getDayOfYear() - t.getCreated().getDayOfYear())
+                .map(t -> t.getCreated().until(LocalDate.now()))
+                .map(d -> d.getDays())
                 .collect(toList());
 
         double average = IntStream.range(0, tasksAwaitingTimes.size())
