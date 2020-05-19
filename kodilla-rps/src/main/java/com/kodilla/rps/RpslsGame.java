@@ -240,6 +240,10 @@ public class RpslsGame {
                 System.out.println("Your and computer's move: " + moves.get(userMoveInt - 1));
             } else if (3 == userMoveInt) {
                 System.out.println("Your and computer's move: " + moves.get(userMoveInt - 1));
+            }else if (4 == userMoveInt) {
+                System.out.println("Your and computer's move: " + moves.get(userMoveInt - 1));
+            }else if (5 == userMoveInt) {
+                System.out.println("Your and computer's move: " + moves.get(userMoveInt - 1));
             }
             System.out.println("No winner in this round!");
         }
