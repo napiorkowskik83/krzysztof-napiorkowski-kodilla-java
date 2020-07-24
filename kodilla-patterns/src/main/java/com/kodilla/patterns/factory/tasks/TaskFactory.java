@@ -14,7 +14,7 @@ public class TaskFactory {
             case DRIVING:
                 return new DrivingTask("Driving", "home", "Jaguar");
             default:
-                return null;
+                throw new IllegalArgumentException("Pointed task type do not exist!");
         }
     }
 }
