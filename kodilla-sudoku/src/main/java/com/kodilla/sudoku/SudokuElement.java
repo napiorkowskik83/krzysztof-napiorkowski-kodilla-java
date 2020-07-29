@@ -19,7 +19,7 @@ public class SudokuElement {
     public boolean setValue(int value){
         if (allowedValues.contains(value)){
             this.value = value;
-            allowedValues.remove(value);
+            //allowedValues.remove(value);
             return true;
         }else{
             return false;

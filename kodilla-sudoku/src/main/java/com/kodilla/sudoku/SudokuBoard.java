@@ -26,7 +26,7 @@ public class SudokuBoard {
                 board += " -----";
             }
             board += "\n|";
-            for (SudokuElement element: row.getRow()){
+            for (SudokuElement element: row.getElemntsRow()){
                 if(element.getValue() != -1){
                     board += "  ";
                     board += element.getValue();
