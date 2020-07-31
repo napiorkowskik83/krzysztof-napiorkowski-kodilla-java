@@ -1,14 +1,14 @@
 package com.kodilla.sudoku;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SudokuElement {
     public static int EMPTY = -1;
     private int value;
-    private Set<Integer> allowedValues;
+    private List<Integer> allowedValues;
 
     public SudokuElement() {
         this.value = EMPTY;
@@ -17,31 +17,35 @@ public class SudokuElement {
     }
 
     public boolean setValue(int value){
-        if (allowedValues.contains(value)){
+        if (this.value == EMPTY && allowedValues.contains(value)){
             this.value = value;
             //allowedValues.remove(value);
             return true;
         }else{
             return false;
         }
-
     }
 
-    public void removeFromAllowedValues(int value){
-        allowedValues.remove(value);
-    }
 
     private void setInitialAllowedValues(){
         allowedValues = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)
-                .collect(Collectors.toCollection(HashSet::new));
+                .collect(Collectors.toCollection(ArrayList::new));
 
     }
 
-    public int getValue() {
+    public void setAllowedValues(List<Integer> allowedValues) {
+        this.allowedValues = allowedValues;
+    }
+
+    public Integer getValue() {
         return value;
     }
 
-    public Set<Integer> getAllowedValues() {
+    public List<Integer> getAllowedValues() {
         return allowedValues;
+    }
+
+    public void removeFromAllowedValues(Integer value){
+        allowedValues.remove(value);
     }
 }
