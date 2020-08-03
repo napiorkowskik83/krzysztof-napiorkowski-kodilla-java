@@ -8,13 +8,8 @@ include 'kodilla-spring-intro'
 include 'kodilla-spring'
 include 'kodilla-patterns'
 include 'kodilla-jdbc'
-<<<<<<< HEAD
-<<<<<<< HEAD
 include 'kodilla-hibernate'
-=======
 include 'kodilla-sudoku'
->>>>>>> 59d48c3... Sudoku start
-=======
 include 'kodilla-sudoku'
->>>>>>> 59d48c3... Sudoku start
+include 'kodilla-hibernate'
 
