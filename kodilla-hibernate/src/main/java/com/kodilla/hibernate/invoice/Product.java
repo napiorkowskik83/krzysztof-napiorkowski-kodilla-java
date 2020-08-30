@@ -13,7 +13,7 @@ public class Product {
     private int id;
     private String name;
     private List<Item> items = new ArrayList<>();
-    private Invoice invoice;
+    //private Invoice invoice;
 
     public Product() {
     }
@@ -47,7 +47,7 @@ public class Product {
     @OneToMany(
             targetEntity = Item.class,
             mappedBy = "product",
-            cascade = CascadeType.ALL,
+            //cascade = CascadeType.ALL
             fetch = FetchType.LAZY
     )
     public List<Item> getItems() {
@@ -56,15 +56,5 @@ public class Product {
 
     private void setItems(List<Item> items) {
         this.items = items;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "INVOICE_ID")
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
     }
 }
