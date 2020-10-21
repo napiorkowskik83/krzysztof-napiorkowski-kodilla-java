@@ -10,6 +10,11 @@ import java.util.List;
         query = "FROM Employee WHERE lastname = :LASTNAME"
 )
 
+@NamedQuery(
+        name = "Employee.retrieveEmployeesWhichNamesInclude",
+        query = "FROM Employee WHERE (firstname LIKE :PHRASE OR lastname LIKE :PHRASE)"
+)
+
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {

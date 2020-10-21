@@ -1,5 +1,6 @@
 package com.kodilla.hibernate.manytomany.dao;
 
+import com.kodilla.hibernate.manytomany.CompaniesAndEmployeesFacade;
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
 import org.junit.Assert;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -19,6 +21,9 @@ public class CompanyDaoTestSuite {
 
     @Autowired
     EmployeeDao employeeDao;
+
+    @Autowired
+    CompaniesAndEmployeesFacade databaseFacade;
 
     @Test
     public void testSaveManyToMany() {
@@ -117,6 +122,52 @@ public class CompanyDaoTestSuite {
             companyDao.deleteById(softwareHouse69Id);
             companyDao.deleteById(softSpecialistsId);
             companyDao.deleteById(dataJugglersId);
+
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+
+    @Test
+    public void testFacadeNamedQueries() {
+
+        Employee johnDoe = new Employee("John", "Doe");
+        Employee jenniferLawrence = new Employee("Jennifer", "Lawrence");
+        Employee chrisDoe = new Employee("Chris", "Johnson");
+
+        Company softwareHouse69 = new Company("Software House 69");
+        Company dataJugglers = new Company("DataSpec Jugglers");
+        Company softSpecialists = new Company("Soft Specialists");
+
+        softwareHouse69.getEmployees().add(johnDoe);
+        softSpecialists.getEmployees().add(johnDoe);
+        softSpecialists.getEmployees().add(jenniferLawrence);
+        dataJugglers.getEmployees().add(jenniferLawrence);
+        dataJugglers.getEmployees().add(chrisDoe);
+
+        List<Company> companies = new ArrayList<>();
+        companies.add(softwareHouse69);
+        companies.add(dataJugglers);
+        companies.add(softSpecialists);
+
+        databaseFacade.addCompanies(companies);
+
+        //When
+        List<Employee> employeesWithJohn = databaseFacade.retrieveEmployeesWhichNamesInclude("%john%");
+        List<Employee> employeesWithWrenc = databaseFacade.retrieveEmployeesWhichNamesInclude("%wrenc%");
+        List<Company> companiesWithSpec = databaseFacade.retrieveCompaniesWhichNamesInclude("%spec%");
+        List<Company> companiesWithGgl = databaseFacade.retrieveCompaniesWhichNamesInclude("%ggl%");
+
+
+        //Then
+        Assert.assertEquals(2, employeesWithJohn.size());
+        Assert.assertEquals(1, employeesWithWrenc.size());
+        Assert.assertEquals(2, companiesWithSpec.size());
+        Assert.assertEquals(1, companiesWithGgl.size());
+
+        try {
+            //CleanUp
+            databaseFacade.cleanUp(companies);
 
         } catch (Exception e) {
             //do nothing
