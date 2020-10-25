@@ -42,7 +42,7 @@ public class Board extends Prototype {
         for(TasksList theList : lists) {
             TasksList clonedList = new TasksList(theList.getName());
             for(Task task : theList.getTasks()) {
-                clonedList.getTasks().add(task);
+                clonedList.getTasks().add(new Task(task.getName()));
             }
             clonedBoard.getLists().add(clonedList);
         }
