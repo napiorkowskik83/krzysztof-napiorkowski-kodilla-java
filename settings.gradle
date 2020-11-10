@@ -12,4 +12,6 @@ include 'kodilla-hibernate'
 include 'kodilla-sudoku'
 include 'kodilla-sudoku'
 include 'kodilla-hibernate'
+include 'kodilla-testing2'
+
 
